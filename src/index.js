@@ -16,9 +16,7 @@ async function loadLeaderboard() {
     const response = await fetch(proxyURL + encodeURIComponent(apiURL));
     var leaderboardData = await response.json();
     var leaderboardData = leaderboardData.data;
-    console.log(leaderboardData)
-    const teamsResponse = await fetch('/data.json');
-    const teams = await teamsResponse.json();
+    const teams = require('./data.json')
 
     leaderboardData.forEach(entry => {
         const numberName = entry.attributes.number_name;
@@ -43,7 +41,6 @@ async function loadLeaderboard() {
 
     const tbody = document.querySelector('#leaderboardTable tbody');
     tbody.innerHTML = ''; // Clear any existing rows
-    console.log(teams)
     for (const [teamNumber, teamInfo] of Object.entries(teams)) {
 
         var scoreTexts = []
@@ -65,7 +62,6 @@ async function loadLeaderboard() {
       <td>${scoreTexts[1]}</td>
       <td>${scoreTexts[2]}</td>
     `;
-        console.log('ads')
         tbody.appendChild(row);
     }
 }
