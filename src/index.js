@@ -1,17 +1,8 @@
 
-function fixDoubleEncoded(str) {
-    try {
-        // Turn escaped unicode into actual bytes
-        const decoded = decodeURIComponent(escape(str));
-        return decoded;
-    } catch (e) {
-        return str; // fallback in case of error
-    }
-}
 async function loadLeaderboard() {
 
     const proxyURL = 'https://corsproxy.io/?url=';
-    const apiURL = 'https://o76fno8oxh.execute-api.eu-central-1.amazonaws.com/api/leaderboard/a196bfec-a0e7-431d-8b2d-e11e7ad00bbc/rankings';
+    const apiURL = 'https://o76fno8oxh.execute-api.eu-central-1.amazonaws.com/api/leaderboard/87b8c427-18e0-4bb9-bf66-2f26f4b20057/rankings';
 
     const response = await fetch(proxyURL + encodeURIComponent(apiURL));
     var leaderboardData = await response.json();
@@ -49,7 +40,7 @@ async function loadLeaderboard() {
         for (let j = 0; j < 3; j++) {
             score = teamInfo.Scores.scores[j]
             if (score == 0) {
-                scoreTexts.push(teamInfo.Rounds[j][0])
+                scoreTexts.push(teamInfo.rounds[j])
                 continue
             }
             scoreTexts.push(score)
@@ -57,7 +48,7 @@ async function loadLeaderboard() {
 
         const row = document.createElement('tr');
         row.innerHTML = `
-      <td>${fixDoubleEncoded(teamInfo.Name)}<h5 style="margin: 0;">${fixDoubleEncoded(teamInfo.Home)}</h5></td>
+      <td>${teamInfo.Name}<h5 style="margin: 0;">${teamInfo.Home}</h5></td>
       <td>${teamInfo.rank}</td>
       <td>${teamInfo.Scores.highscore}</td>
       <td>${scoreTexts[0]}</td>
