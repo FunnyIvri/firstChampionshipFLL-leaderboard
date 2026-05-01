@@ -2,7 +2,7 @@
 async function loadLeaderboard() {
 
     const proxyURL = 'https://corsproxy.io/?url=';
-    const apiURL = 'https://o76fno8oxh.execute-api.eu-central-1.amazonaws.com/api/leaderboard/87b8c427-18e0-4bb9-bf66-2f26f4b20057/rankings';
+    const apiURL = 'https://o76fno8oxh.execute-api.eu-central-1.amazonaws.com/api/leaderboard/c7593a97-fb69-40f2-a5ff-405301174ae4/rankings';
 
     const response = await fetch(proxyURL + encodeURIComponent(apiURL));
     var leaderboardData = await response.json();
